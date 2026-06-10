@@ -7,6 +7,7 @@
 
 import { readFile, writeFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
+import process from 'node:process';
 import { type MoneyState, MoneyStateSchema, isV1State, migrateV1ToV2 } from './schema.js';
 
 export interface StateManagerOptions {

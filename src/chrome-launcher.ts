@@ -12,6 +12,7 @@ import { spawn, type ChildProcess } from 'node:child_process';
 import { existsSync, mkdirSync } from 'node:fs';
 import { homedir, platform } from 'node:os';
 import { join } from 'node:path';
+import process from 'node:process';
 
 export interface ChromeLauncherOptions {
   port?: number;
