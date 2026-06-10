@@ -169,9 +169,19 @@ cheat-on-money/
 
 ---
 
-## 架构要点
+## 多平台 Skill 适配
 
-### 零依赖 CDP 协议
+cheat-on-money 的 skill 同时支持三个 AI 编码助手：
+
+- **Claude Code** — 通过 `~/.claude/skills/` 软链加载，口语化指令触发
+- **Codex CLI** — 通过 `~/.codex/skills/` 软链加载，自动发现 skill
+- **Hermes** — 通过 `~/.hermes/skills/` 软链加载，自动发现 skill
+
+所有 SKILL.md 使用相同的 YAML frontmatter 格式，`install.sh` 安装时自动将 `{{CHEAT_PROJECT_ROOT}}` 替换为项目绝对路径，根除跨平台路径断裂问题。
+
+---
+
+## 架构要点
 
 两个 adapter 都使用 Chrome DevTools Protocol 原生交互，不走 playwright：
 
