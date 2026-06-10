@@ -36,8 +36,8 @@ export interface BossResult {
  * 这个函数在浏览器上下文中执行，不能有外部引用。
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-function pageExtractorCode(): any {
-  const out: any = { url: location.href, title: document.title, items: [], diagnostics: {} };
+function pageExtractorCode(): Record<string, unknown> {
+  const out: Record<string, unknown> = { url: location.href, title: document.title, items: [], diagnostics: {} };
   const bodyText = document.body.innerText || '';
 
   // 反爬/登录/验证拦截探测
@@ -46,7 +46,7 @@ function pageExtractorCode(): any {
   if (/登录后查看|立即登录|扫码登录|未登录/.test(bodyText) && bodyText.length < 1500)
     out.diagnostics.maybeNeedLogin = '疑似未登录/结果未加载（页面提示登录）';
 
-  const txt = (n: any) => (n ? (n.textContent || '').trim().replace(/\s+/g, ' ') : '');
+  const txt = (n: Element | null) => (n ? (n.textContent || '').trim().replace(/\s+/g, ' ') : '');
 
   // BOSS 搜索结果是结构化 DOM：li.job-card-box 一卡一岗。带兜底选择器以防改版。
   let cardEls = [...document.querySelectorAll('li.job-card-box')];

@@ -14,6 +14,7 @@
  *   await cdp.close();
  */
 
+import { Buffer } from 'node:buffer';
 import http from 'node:http';
 
 // ─── Types ──────────────────────────────────────────

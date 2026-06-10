@@ -35,8 +35,8 @@ export interface XianyuResult {
  * 启发式：找含单个 ¥ 价格的文本节点，归并卡片，去重。
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-function pageExtractorCode(): any {
-  const out: any = { url: location.href, title: document.title, items: [], diagnostics: {} };
+function pageExtractorCode(): Record<string, unknown> {
+  const out: Record<string, unknown> = { url: location.href, title: document.title, items: [], diagnostics: {} };
   const bodyText = document.body.innerText || '';
 
   // 反爬/登录拦截探测
@@ -49,7 +49,7 @@ function pageExtractorCode(): any {
   const wantRe = /(\d[\d,.]*)\s*人?想要/;
   const priceCount = (s: string) => (s.match(priceReG) || []).length;
   const seen = new Set<string>();
-  const cards: any[] = [];
+  const cards: Record<string, unknown>[] = [];
 
   for (const el of Array.from(document.querySelectorAll('a, div, li'))) {
     const t = (el as HTMLElement).innerText?.trim();
@@ -86,7 +86,7 @@ function pageExtractorCode(): any {
   }
 
   // 同一商品的价格碎片 -> 按链接 id 归并
-  const byId = new Map<string, any>();
+  const byId = new Map<string, Record<string, unknown>>();
   for (const c of cards) {
     const id = (c.link.match(/[?&]id=(\d+)/) || [null, c.link])[1] || c.link || c.title;
     const prev = byId.get(id);
@@ -102,7 +102,7 @@ function pageExtractorCode(): any {
     });
   }
 
-  out.items = [...byId.values()].filter((c: any) => c.title && c.price).slice(0, 60);
+  out.items = [...byId.values()].filter((c: Record<string, unknown>) => c.title && c.price).slice(0, 60);
   out.diagnostics.rawCandidateCount = cards.length;
   out.diagnostics.mergedCount = out.items.length;
   out.diagnostics.sampleRawText = bodyText.slice(0, 300);
