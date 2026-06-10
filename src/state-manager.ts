@@ -7,12 +7,7 @@
 
 import { readFile, writeFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
-import {
-  type MoneyState,
-  MoneyStateSchema,
-  isV1State,
-  migrateV1ToV2,
-} from './schema.js';
+import { type MoneyState, MoneyStateSchema, isV1State, migrateV1ToV2 } from './schema.js';
 
 export interface StateManagerOptions {
   /** 状态文件路径，默认 ./money-state.json 或 cwd + .money-state.json */
@@ -108,9 +103,7 @@ export async function updateState(
   const updated: MoneyState = {
     ...current,
     ...partial,
-    profile: partial.profile
-      ? { ...current.profile, ...partial.profile }
-      : current.profile,
+    profile: partial.profile ? { ...current.profile, ...partial.profile } : current.profile,
     opportunities: partial.opportunities ?? current.opportunities,
     active: partial.active
       ? {

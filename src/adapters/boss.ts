@@ -38,7 +38,7 @@ export interface BossResult {
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function pageExtractorCode(): any {
   const out: any = { url: location.href, title: document.title, items: [], diagnostics: {} };
-  const bodyText = (document.body.innerText || '');
+  const bodyText = document.body.innerText || '';
 
   // 反爬/登录/验证拦截探测
   if (/请完成.*验证|安全验证|滑块验证|请输入验证码|验证后继续访问|拖动.*完成验证/.test(bodyText))
@@ -50,29 +50,40 @@ function pageExtractorCode(): any {
 
   // BOSS 搜索结果是结构化 DOM：li.job-card-box 一卡一岗。带兜底选择器以防改版。
   let cardEls = [...document.querySelectorAll('li.job-card-box')];
-  if (!cardEls.length) cardEls = [...document.querySelectorAll('[class*="job-card-box"], [class*="job-card-wrap"]')];
+  if (!cardEls.length)
+    cardEls = [...document.querySelectorAll('[class*="job-card-box"], [class*="job-card-wrap"]')];
 
   const seen = new Set<string>();
   let obfCount = 0;
   for (const el of cardEls) {
     const nameA = el.querySelector('a.job-name, [class*="job-name"]');
-    const title = txt(nameA) || txt(el.querySelector('[class*="job-title"] a, [class*="job-title"]'));
+    const title =
+      txt(nameA) || txt(el.querySelector('[class*="job-title"] a, [class*="job-title"]'));
     if (!title) continue;
 
     // 薪资：BOSS 用自定义字体（kanzhun-mix）把数字渲染成私有区码点
     const salRaw = txt(el.querySelector('[class*="job-salary"], [class*="salary"]'));
-    const salObfuscated = [...salRaw].some(c => c.codePointAt(0)! >= 0xE000 && c.codePointAt(0)! <= 0xF8FF);
-    const salary = [...salRaw].map(c =>
-      (c.codePointAt(0)! >= 0xE000 && c.codePointAt(0)! <= 0xF8FF) ? '\u25AF' : c
-    ).join('');
+    const salObfuscated = [...salRaw].some(
+      (c) => c.codePointAt(0)! >= 0xe000 && c.codePointAt(0)! <= 0xf8ff,
+    );
+    const salary = [...salRaw]
+      .map((c) => (c.codePointAt(0)! >= 0xe000 && c.codePointAt(0)! <= 0xf8ff ? '\u25AF' : c))
+      .join('');
     if (salObfuscated) obfCount++;
 
     // 标签：经验/学历/技能
-    const tags = [...el.querySelectorAll('ul.tag-list li, [class*="tag-list"] li, [class*="tag"] li')]
-      .map(t => txt(t)).filter(Boolean);
+    const tags = [
+      ...el.querySelectorAll('ul.tag-list li, [class*="tag-list"] li, [class*="tag"] li'),
+    ]
+      .map((t) => txt(t))
+      .filter(Boolean);
 
     // 公司
-    const company = txt(el.querySelector('a[href*="gongsi"], [class*="company-name"], [class*="company"] a, [class*="company"]'));
+    const company = txt(
+      el.querySelector(
+        'a[href*="gongsi"], [class*="company-name"], [class*="company"] a, [class*="company"]',
+      ),
+    );
     const href = (nameA && nameA.getAttribute('href')) || '';
     const link = href ? (href.startsWith('http') ? href : location.origin + href) : '';
 
@@ -84,8 +95,8 @@ function pageExtractorCode(): any {
 
   out.items = out.items.slice(0, 60);
   out.diagnostics.cardCount = cardEls.length;
-  if (obfCount) out.diagnostics.salaryObfuscated =
-    `${obfCount} 条薪资数字被 BOSS 字体混淆（▯ 占位），单位明文可见`;
+  if (obfCount)
+    out.diagnostics.salaryObfuscated = `${obfCount} 条薪资数字被 BOSS 字体混淆（▯ 占位），单位明文可见`;
 
   if (!out.items.length) {
     out.diagnostics.sampleRawText = bodyText.slice(0, 400);

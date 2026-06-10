@@ -22,7 +22,7 @@ import { launchChrome, checkChrome } from './chrome-launcher.js';
 function safePort(val: string | undefined, defaultPort: number): number {
   const raw = parseInt(val || String(defaultPort), 10);
   if (isNaN(raw) || raw < 1 || raw > 65535) {
-    console.error(`❌ 无效端口: "\${val || ''}"，使用默认端口 \${defaultPort}`);
+    console.error(`❌ 无效端口: '${val || ''}'，使用默认端口 ${defaultPort}`);
     return defaultPort;
   }
   return raw;

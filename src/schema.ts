@@ -15,7 +15,12 @@ export const VerdictEnum = z.enum(['高危', '存疑', '可行']);
 export type Verdict = z.infer<typeof VerdictEnum>;
 
 export const OpportunityStatusEnum = z.enum([
-  'candidate', 'verifying', 'chosen', 'running', 'dropped', 'done',
+  'candidate',
+  'verifying',
+  'chosen',
+  'running',
+  'dropped',
+  'done',
 ]);
 export type OpportunityStatus = z.infer<typeof OpportunityStatusEnum>;
 
@@ -103,9 +108,7 @@ export type MoneyState = z.infer<typeof MoneyStateSchema>;
  */
 export function isV1State(raw: Record<string, unknown>): boolean {
   return (
-    raw.schema_version === undefined &&
-    typeof raw.profile === 'object' &&
-    raw.profile !== null
+    raw.schema_version === undefined && typeof raw.profile === 'object' && raw.profile !== null
   );
 }
 
@@ -122,12 +125,12 @@ export function migrateV1ToV2(v1: Record<string, unknown>): MoneyState {
     profile: {
       tier: (profile.tier as Tier) ?? 'T0',
       tier_reason: (profile.tier_reason as string) ?? '',
-      skills: Array.isArray(profile.skills) ? profile.skills as string[] : [],
+      skills: Array.isArray(profile.skills) ? (profile.skills as string[]) : [],
       weekly_hours: (profile.weekly_hours as number | null) ?? null,
       startup_capital: (profile.startup_capital as number) ?? 0,
       region: (profile.region as string) ?? '中国大陆',
       can_show_face: (profile.can_show_face as boolean | null) ?? null,
-      language: Array.isArray(profile.language) ? profile.language as string[] : ['中文'],
+      language: Array.isArray(profile.language) ? (profile.language as string[]) : ['中文'],
       notes: (profile.notes as string) ?? '',
     },
     opportunities: opportunities.map((opp: Record<string, unknown>) => ({
@@ -137,8 +140,8 @@ export function migrateV1ToV2(v1: Record<string, unknown>): MoneyState {
       for_tier: (opp.for_tier as Tier) ?? 'T0',
       money_source: (opp.money_source as string) ?? '',
       verdict: (opp.verdict as Verdict) ?? '存疑',
-      red_flags: Array.isArray(opp.red_flags) ? opp.red_flags as string[] : [],
-      suspect_flags: Array.isArray(opp.suspect_flags) ? opp.suspect_flags as string[] : [],
+      red_flags: Array.isArray(opp.red_flags) ? (opp.red_flags as string[]) : [],
+      suspect_flags: Array.isArray(opp.suspect_flags) ? (opp.suspect_flags as string[]) : [],
       freshness: (opp.freshness as string) ?? '',
       verify_first_step: (opp.verify_first_step as string) ?? '',
       income_expectation: (opp.income_expectation as string) ?? '',

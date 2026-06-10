@@ -37,7 +37,7 @@ export interface XianyuResult {
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function pageExtractorCode(): any {
   const out: any = { url: location.href, title: document.title, items: [], diagnostics: {} };
-  const bodyText = (document.body.innerText || '');
+  const bodyText = document.body.innerText || '';
 
   // 反爬/登录拦截探测
   if (/非法访问|请使用正常浏览器/.test(bodyText))
@@ -67,14 +67,22 @@ function pageExtractorCode(): any {
 
     // 价格重组：闲鱼把 ¥ / 整数 / .小数 拆成多节点
     const pm = ct.match(/[¥￥]\s*(\d+)\s*(\.\s*\d+)?/);
-    const price = pm ? ('¥' + pm[1] + (pm[2] ? pm[2].replace(/\s+/g, '') : '')) : '';
+    const price = pm ? '¥' + pm[1] + (pm[2] ? pm[2].replace(/\s+/g, '') : '') : '';
     const want = (ct.match(wantRe) || [null, null])[1];
-    const title = ct.split('\n').map(s => s.trim())
-      .filter(s => s && !/想要/.test(s) && !/^[\d.,%¥￥]+$/.test(s) && s.length >= 4)
-      .sort((a, b) => b.length - a.length)[0] || '';
+    const title =
+      ct
+        .split('\n')
+        .map((s) => s.trim())
+        .filter((s) => s && !/想要/.test(s) && !/^[\d.,%¥￥]+$/.test(s) && s.length >= 4)
+        .sort((a, b) => b.length - a.length)[0] || '';
     const link = (card.querySelector('a') || el.closest('a'))?.getAttribute('href') || '';
 
-    cards.push({ title, price, want, link: link.startsWith('http') ? link : 'https://www.goofish.com' + link });
+    cards.push({
+      title,
+      price,
+      want,
+      link: link.startsWith('http') ? link : 'https://www.goofish.com' + link,
+    });
   }
 
   // 同一商品的价格碎片 -> 按链接 id 归并
@@ -82,9 +90,12 @@ function pageExtractorCode(): any {
   for (const c of cards) {
     const id = (c.link.match(/[?&]id=(\d+)/) || [null, c.link])[1] || c.link || c.title;
     const prev = byId.get(id);
-    if (!prev) { byId.set(id, c); continue; }
+    if (!prev) {
+      byId.set(id, c);
+      continue;
+    }
     byId.set(id, {
-      title: (c.title.length > prev.title.length ? c.title : prev.title),
+      title: c.title.length > prev.title.length ? c.title : prev.title,
       price: prev.price || c.price,
       want: prev.want || c.want,
       link: prev.link || c.link,

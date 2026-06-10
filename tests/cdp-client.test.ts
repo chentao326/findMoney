@@ -15,24 +15,28 @@ beforeAll(async () => {
     const s = createServer((req, res) => {
       if (req.url === '/json' && req.method === 'GET') {
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify([
-          {
-            id: 'page-1',
+        res.end(
+          JSON.stringify([
+            {
+              id: 'page-1',
+              type: 'page',
+              url: 'about:blank',
+              title: '',
+              webSocketDebuggerUrl: `ws://localhost:${port}/devtools/page-1`,
+            },
+          ]),
+        );
+      } else if (req.url === '/json/new' && req.method === 'PUT') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(
+          JSON.stringify({
+            id: 'page-2',
             type: 'page',
             url: 'about:blank',
             title: '',
-            webSocketDebuggerUrl: `ws://localhost:${port}/devtools/page-1`,
-          },
-        ]));
-      } else if (req.url === '/json/new' && req.method === 'PUT') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          id: 'page-2',
-          type: 'page',
-          url: 'about:blank',
-          title: '',
-          webSocketDebuggerUrl: `ws://localhost:${port}/devtools/page-2`,
-        }));
+            webSocketDebuggerUrl: `ws://localhost:${port}/devtools/page-2`,
+          }),
+        );
       } else if (req.url === '/json/version' && req.method === 'GET') {
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ Browser: 'Chrome/999.0' }));

@@ -142,7 +142,7 @@ export class CdpClient {
   /** 获取所有可调试的页面目标 */
   async listTargets(): Promise<CdpTarget[]> {
     const result = await httpJson(this.host, this.port, '/json');
-    return Array.isArray(result) ? result as CdpTarget[] : [];
+    return Array.isArray(result) ? (result as CdpTarget[]) : [];
   }
 
   /** 打开新的空白标签页 */
@@ -186,14 +186,18 @@ export class CdpClient {
     };
 
     try {
-      const raw = await wsSend(wsUrl, msg) as Record<string, unknown>;
+      const raw = (await wsSend(wsUrl, msg)) as Record<string, unknown>;
       if (raw.error) {
-        return { error: (raw.error as Record<string, unknown>)?.message as string ?? JSON.stringify(raw.error) };
+        return {
+          error:
+            ((raw.error as Record<string, unknown>)?.message as string) ??
+            JSON.stringify(raw.error),
+        };
       }
       const result = raw.result as Record<string, unknown> | undefined;
       if (result?.exceptionDetails) {
         const detail = result.exceptionDetails as Record<string, unknown>;
-        return { error: detail.text as string ?? 'JS 执行异常' };
+        return { error: (detail.text as string) ?? 'JS 执行异常' };
       }
       return { result: (result?.result as Record<string, unknown>)?.value };
     } catch (err) {
@@ -217,9 +221,12 @@ export class CdpClient {
     };
 
     try {
-      const raw = await wsSend(wsUrl, msg) as Record<string, unknown>;
+      const raw = (await wsSend(wsUrl, msg)) as Record<string, unknown>;
       if (raw.error) {
-        return { success: false, error: (raw.error as Record<string, unknown>)?.message as string ?? '导航失败' };
+        return {
+          success: false,
+          error: ((raw.error as Record<string, unknown>)?.message as string) ?? '导航失败',
+        };
       }
       // Page.navigate 成功返回 {frameId, loaderId} 等
       return { success: true };

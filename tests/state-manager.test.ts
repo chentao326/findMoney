@@ -18,10 +18,7 @@ describe('state-manager', () => {
 
   it('initState 应该创建合法的状态文件', async () => {
     const dir = tempDir();
-    const state = await initState(
-      { tier: 'T1', skills: ['写作'], weekly_hours: 15 },
-      { cwd: dir },
-    );
+    const state = await initState({ tier: 'T1', skills: ['写作'], weekly_hours: 15 }, { cwd: dir });
     expect(state.schema_version).toBe(2);
     expect(state.profile.tier).toBe('T1');
     expect(state.profile.skills).toEqual(['写作']);
