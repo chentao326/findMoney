@@ -1,4 +1,4 @@
-# cheat-on-money v2 — AI 时代靠谱兼职发现 + 反诈验证系统
+# findMoney v2 — AI 时代靠谱兼职发现 + 反诈验证系统
 
 > 零外部依赖 · TypeScript 化 · Zod schema 校验 · 统一 CLI · 可测试
 
@@ -14,8 +14,8 @@
 ## 安装
 
 ```bash
-git clone <repo-url> cheat-on-money
-cd cheat-on-money
+git clone <repo-url> findMoney
+cd findMoney
 chmod +x install.sh
 ./install.sh
 ```
@@ -35,14 +35,14 @@ chmod +x install.sh
 ### 子命令一览
 
 ```
-cheat-on-money xianyu <关键词> [端口]         闲鱼成交侧搜索
-cheat-on-money boss <关键词> [城市码] [端口]   BOSS直聘招聘侧搜索
-cheat-on-money state read                    查看当前状态
-cheat-on-money state init                    初始化状态文件
-cheat-on-money state status                  检查状态文件是否存在
-cheat-on-money chrome launch [端口] [URL]     启动 Chrome（调试模式）
-cheat-on-money chrome check [端口]            检查 Chrome 调试端口
-cheat-on-money help                          显示帮助
+findMoney xianyu <关键词> [端口]         闲鱼成交侧搜索
+findMoney boss <关键词> [城市码] [端口]   BOSS直聘招聘侧搜索
+findMoney state read                    查看当前状态
+findMoney state init                    初始化状态文件
+findMoney state status                  检查状态文件是否存在
+findMoney chrome launch [端口] [URL]     启动 Chrome（调试模式）
+findMoney chrome check [端口]            检查 Chrome 调试端口
+findMoney help                          显示帮助
 ```
 
 ### 完整工作流
@@ -51,10 +51,10 @@ cheat-on-money help                          显示帮助
 
 ```bash
 # 1. 初始化状态文件
-cheat-on-money state init
+findMoney state init
 
 # 2. 查看状态
-cheat-on-money state status
+findMoney state status
 ```
 
 #### 使用 adapter 搜索一手数据
@@ -63,13 +63,13 @@ adapter 是 **B 档半自动模式**：你自己在浏览器里登录 → adapte
 
 ```bash
 # 1. 启动 Chrome（调试模式），手动登录对应平台
-cheat-on-money chrome launch
+findMoney chrome launch
 
 # 2. 在另一个终端搜索闲鱼成交数据
-cheat-on-money xianyu "AI头像"
+findMoney xianyu "AI头像"
 
 # 3. 搜索 BOSS直聘招聘数据
-cheat-on-money boss "AIGC" 100010000
+findMoney boss "AIGC" 100010000
 ```
 
 > 闲鱼 adapter 看"在卖什么 / 什么价 / 多少人想要"（真实的成交侧证据）
@@ -135,7 +135,7 @@ npm run format:check
 ## 项目结构
 
 ```
-cheat-on-money/
+findMoney/
 ├── src/
 │   ├── cli.ts                  统一 CLI 入口
 │   ├── cdp-client.ts           共享 CDP 客户端（零依赖）
@@ -171,7 +171,7 @@ cheat-on-money/
 
 ## 多平台 Skill 适配
 
-cheat-on-money 的 skill 同时支持三个 AI 编码助手：
+findMoney 的 skill 同时支持三个 AI 编码助手：
 
 - **Claude Code** — 通过 `~/.claude/skills/` 软链加载，口语化指令触发
 - **Codex CLI** — 通过 `~/.codex/skills/` 软链加载，自动发现 skill
@@ -198,7 +198,7 @@ cheat-on-money 的 skill 同时支持三个 AI 编码助手：
 - 检测到旧版 v1 schema 自动迁移到 v2
 - 更新操作支持部分字段合并
 
-### 路径修复机制
+### CHEAT_PROJECT_ROOT机制
 
 SKILL.md 中使用 `{{CHEAT_PROJECT_ROOT}}` 占位符，`install.sh` 安装时替换为实际绝对路径。彻底根除软链接导致的路径断裂问题。
 

@@ -11,7 +11,7 @@ allowed-tools: Bash(*), Read, Write, Edit, Glob, Skill
 
 ### Step 1 — 读上下文
 - 读 `.money-state.json`，找到对应机会。
-- 读 `{{CHEAT_PROJECT_ROOT}}/shared-references/anti-scam-rubric.md`（回顾红线）。
+- 读 `/Volumes/My SSD/code/cheat-on-money-v2/shared-references/anti-scam-rubric.md`（回顾红线）。
 - 读 `lessons.md`（若存在）。
 
 ### Step 2 — 输出行动方案

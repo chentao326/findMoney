@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /**
  * @file 统一 CLI 入口
- * @description 提供 cheat-on-money 命令行工具。
+ * @description 提供 findMoney 命令行工具。
  *   子命令：xianyu / boss / state / chrome
  *
  *   用法：
- *     cheat-on-money xianyu <关键词> [端口]
- *     cheat-on-money boss <关键词> [城市码] [端口]
- *     cheat-on-money state [read|init|status]
- *     cheat-on-money chrome [launch|check]
+ *     findMoney xianyu <关键词> [端口]
+ *     findMoney boss <关键词> [城市码] [端口]
+ *     findMoney state [read|init|status]
+ *     findMoney chrome [launch|check]
  *
  *   原生 process.argv 解析，不引入重框架。
  */
@@ -30,17 +30,17 @@ function safePort(val: string | undefined, defaultPort: number): number {
 
 function printHelp(): void {
   console.log(`
-cheat-on-money v2 — AI 时代靠谱兼职发现 + 反诈验证
+findMoney v2 — AI 时代靠谱兼职发现 + 反诈验证
 
 用法:
-  cheat-on-money xianyu <关键词> [端口]         闲鱼成交侧搜索
-  cheat-on-money boss <关键词> [城市码] [端口]   BOSS直聘招聘侧搜索
-  cheat-on-money state read                    查看当前状态
-  cheat-on-money state init                    初始化状态文件
-  cheat-on-money state status                  检查状态文件是否存在
-  cheat-on-money chrome launch [端口] [URL]     启动 Chrome（调试模式）
-  cheat-on-money chrome check [端口]            检查 Chrome 调试端口
-  cheat-on-money help                          显示此帮助
+  findMoney xianyu <关键词> [端口]         闲鱼成交侧搜索
+  findMoney boss <关键词> [城市码] [端口]   BOSS直聘招聘侧搜索
+  findMoney state read                    查看当前状态
+  findMoney state init                    初始化状态文件
+  findMoney state status                  检查状态文件是否存在
+  findMoney chrome launch [端口] [URL]     启动 Chrome（调试模式）
+  findMoney chrome check [端口]            检查 Chrome 调试端口
+  findMoney help                          显示此帮助
 `);
 }
 
@@ -58,7 +58,7 @@ async function main(): Promise<void> {
       const keyword = args[1];
       const port = safePort(args[2], 9222);
       if (!keyword) {
-        console.error('❌ 用法: cheat-on-money xianyu <关键词> [端口]');
+        console.error('❌ 用法: findMoney xianyu <关键词> [端口]');
         exit(1);
       }
       const result = await runXianyuAdapter(keyword, port);
@@ -71,7 +71,7 @@ async function main(): Promise<void> {
       const city = args[2] || '100010000';
       const port = safePort(args[3], 9222);
       if (!keyword) {
-        console.error('❌ 用法: cheat-on-money boss <关键词> [城市码] [端口]');
+        console.error('❌ 用法: findMoney boss <关键词> [城市码] [端口]');
         exit(1);
       }
       const result = await runBossAdapter(keyword, city, port);
@@ -87,7 +87,7 @@ async function main(): Promise<void> {
         case 'read': {
           const exists = await stateExists(opts);
           if (!exists) {
-            console.error('⚠️ 状态文件不存在，请先运行 cheat-on-money state init');
+            console.error('⚠️ 状态文件不存在，请先运行 findMoney state init');
             exit(1);
           }
           const state = await readState(opts);

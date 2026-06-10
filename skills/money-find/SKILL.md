@@ -10,7 +10,7 @@ allowed-tools: Bash(*), Read, Write, Edit, Glob, WebSearch, WebFetch, Skill
 ## 核心方法（先读这条）
 
 **主方法是「需求信号反推法」，不是「搜怎么赚钱的帖子」。**
-完整方法见 `{{CHEAT_PROJECT_ROOT}}/shared-references/demand-signal-method.md`，本 skill 严格执行它。
+完整方法见 `/Volumes/My SSD/code/cheat-on-money-v2/shared-references/demand-signal-method.md`，本 skill 严格执行它。
 
 ## 铁律
 
@@ -19,19 +19,19 @@ allowed-tools: Bash(*), Read, Write, Edit, Glob, WebSearch, WebFetch, Skill
 3. **绝不凭记忆。** 信号一律 WebSearch 实时获取。
 4. **核查发布日期（rubric C′）。** 超 24 个月默认失效。
 5. **每个机会先答"钱从哪来"**，过三连：谁有真需求 / 个人能否供给 / 买家够得着。
-6. **每个机会必须过 `{{CHEAT_PROJECT_ROOT}}/shared-references/anti-scam-rubric.md`**（含 C′）。
+6. **每个机会必须过 `/Volumes/My SSD/code/cheat-on-money-v2/shared-references/anti-scam-rubric.md`**（含 C′）。
 7. **按画像收敛**，不全量铺开。
 
 ## 流程
 
 ### Step 0 — 读上下文
 - 读 `.money-state.json` 拿画像 + **`profile.tier` 段位**（无 → 路由 `money-init`）。
-- 读 `{{CHEAT_PROJECT_ROOT}}/shared-references/user-tiers.md`（按段位分流）。
-- 读 `{{CHEAT_PROJECT_ROOT}}/shared-references/demand-signal-method.md`（主方法）。
-- 读 `{{CHEAT_PROJECT_ROOT}}/shared-references/opportunity-taxonomy.md`（机会类型，仅辅助分类）。
-- 读 `{{CHEAT_PROJECT_ROOT}}/shared-references/anti-scam-rubric.md`（反诈 + 时效）。
+- 读 `/Volumes/My SSD/code/cheat-on-money-v2/shared-references/user-tiers.md`（按段位分流）。
+- 读 `/Volumes/My SSD/code/cheat-on-money-v2/shared-references/demand-signal-method.md`（主方法）。
+- 读 `/Volumes/My SSD/code/cheat-on-money-v2/shared-references/opportunity-taxonomy.md`（机会类型，仅辅助分类）。
+- 读 `/Volumes/My SSD/code/cheat-on-money-v2/shared-references/anti-scam-rubric.md`（反诈 + 时效）。
 - **读 `lessons.md`（若存在）**：用户过往复盘沉淀的经验。
-- **看 `{{CHEAT_PROJECT_ROOT}}/shared-references/worked-examples.md`** 作为高质量推理范本参照。
+- **看 `/Volumes/My SSD/code/cheat-on-money-v2/shared-references/worked-examples.md`** 作为高质量推理范本参照。
 
 ### Step 1 — 采集需求信号
 **先按段位锁定方向范围**（user-tiers）。按方向 WebSearch **一级信源**（都加年份）：

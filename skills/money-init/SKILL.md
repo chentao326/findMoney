@@ -9,8 +9,8 @@ allowed-tools: Bash(*), Read, Write, Edit, Glob
 ## 流程
 
 ### Step 1 — 读上下文
-- 读 `{{CHEAT_PROJECT_ROOT}}/shared-references/user-tiers.md`，按"技能 × 资源 × 目标"把用户归到 **T0/T1/T2/T3** 一档。
-- 读 `{{CHEAT_PROJECT_ROOT}}/shared-references/anti-scam-rubric.md`，**确保用户已阅读并理解**反诈红线。
+- 读 `/Volumes/My SSD/code/cheat-on-money-v2/shared-references/user-tiers.md`，按"技能 × 资源 × 目标"把用户归到 **T0/T1/T2/T3** 一档。
+- 读 `/Volumes/My SSD/code/cheat-on-money-v2/shared-references/anti-scam-rubric.md`，**确保用户已阅读并理解**反诈红线。
 
 ### Step 2 — 收集用户画像
 通过对话收集（以下都问，但允许用户跳过任何项）：
@@ -48,4 +48,4 @@ cheat-on-money state read > /tmp/money-state.json
 完成后告知用户：
 - 随时可以说「帮我找机会」触发 money-find
 - 发现可疑机会说「XX 靠谱吗」触发 money-verify
-- 建议收藏 `{{CHEAT_PROJECT_ROOT}}/shared-references/anti-scam-rubric.md` 常读
+- 建议收藏 `/Volumes/My SSD/code/cheat-on-money-v2/shared-references/anti-scam-rubric.md` 常读

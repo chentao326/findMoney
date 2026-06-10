@@ -9,14 +9,14 @@ allowed-tools: Bash(*), Read, Write, Edit, Glob, WebSearch, WebFetch, Skill
 
 ## 核心方法
 
-打分必须严格依据 `{{CHEAT_PROJECT_ROOT}}/shared-references/anti-scam-rubric.md`。
+打分必须严格依据 `/Volumes/My SSD/code/cheat-on-money-v2/shared-references/anti-scam-rubric.md`。
 **不要凭直觉**，逐条对照红线。
 
 ## 流程
 
 ### Step 1 — 读上下文
 - 读 `.money-state.json`。
-- 读 `{{CHEAT_PROJECT_ROOT}}/shared-references/anti-scam-rubric.md`（反诈标准唯一来源）。
+- 读 `/Volumes/My SSD/code/cheat-on-money-v2/shared-references/anti-scam-rubric.md`（反诈标准唯一来源）。
 - 读 `lessons.md`（若存在）。
 
 ### Step 2 — 采集一手信息

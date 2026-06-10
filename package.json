@@ -1,9 +1,9 @@
 {
-  "name": "cheat-on-money",
+  "name": "findmoney",
   "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "AI 时代靠谱兼职发现 + 反诈验证 skill 系统",
+  "description": "AI 时代靠谱兼职发现 + 反诈验证系统",
   "scripts": {
     "build": "tsc",
     "dev": "tsx",

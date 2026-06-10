@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# cheat-on-money v2 安装脚本
+# findMoney v2 安装脚本
 #
 # 安装到所有支持的 AI 平台：
 #   - Claude Code    → ~/.claude/skills/
@@ -7,20 +7,20 @@
 #   - Hermes         → ~/.hermes/skills/
 #
 # 1. 安装 npm 依赖 & 构建 TypeScript
-# 2. 在 SKILL.md 中替换 {{CHEAT_PROJECT_ROOT}} 为实际项目路径
+# 2. 在 SKILL.md 中替换 {{FINDMONEY_ROOT}} 为实际项目路径
 # 3. 把各子 skill 软链到各平台的 skill 目录
-# 4. 创建 CHEAT_PROJECT_ROOT 标记文件
+# 4. 创建 FINDMONEY_ROOT 标记文件
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-MARKER="$ROOT/CHEAT_PROJECT_ROOT"
+MARKER="$ROOT/FINDMONEY_ROOT"
 
-echo "=== cheat-on-money v2 安装 ==="
+echo "=== findMoney v2 安装 ==="
 echo "项目路径: $ROOT"
 
 # 0. 创建项目标记文件
 touch "$MARKER"
-echo "✓ CHEAT_PROJECT_ROOT 标记文件已创建"
+echo "✓ FINDMONEY_ROOT 标记文件已创建"
 
 # 1. 安装依赖 + 构建
 echo "--- 安装 npm 依赖 ---"
@@ -33,7 +33,7 @@ npm run build
 echo "--- 处理 SKILL.md 路径占位符 ---"
 for skill_file in "$ROOT"/skills/*/SKILL.md; do
   if [ -f "$skill_file" ]; then
-    sed -i.bak "s|{{CHEAT_PROJECT_ROOT}}|$ROOT|g" "$skill_file"
+    sed -i.bak "s|{{FINDMONEY_ROOT}}|$ROOT|g" "$skill_file"
     rm -f "$skill_file.bak"
     echo "  processed: $(basename "$(dirname "$skill_file")")"
   fi
@@ -70,7 +70,7 @@ fi
 
 echo ""
 echo "=== 安装完成 ==="
-echo "现在可以在以下平台使用 cheat-on-money skill："
+echo "现在可以在以下平台使用 findMoney skill："
 echo "  • Claude Code → 说「我想搞钱」触发 money-init"
 echo "  • Codex CLI   → 系统会自动发现 money-* skill"
 echo "  • Hermes      → 系统会自动发现 money-* skill"
