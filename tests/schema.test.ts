@@ -4,8 +4,6 @@ import {
   isV1State,
   migrateV1ToV2,
   CURRENT_SCHEMA_VERSION,
-  ProfileSchema,
-  OpportunitySchema,
 } from '../src/schema.js';
 
 describe('MoneyStateSchema', () => {

@@ -35,6 +35,7 @@ export interface BossResult {
  * 在目标页面上执行的 JS 提取器（作为字符串传给 CDP Runtime.evaluate）。
  * 这个函数在浏览器上下文中执行，不能有外部引用。
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 function pageExtractorCode(): any {
   const out: any = { url: location.href, title: document.title, items: [], diagnostics: {} };
   const bodyText = (document.body.innerText || '');

@@ -13,7 +13,7 @@
  *   原生 process.argv 解析，不引入重框架。
  */
 
-import { cwd, argv, exit, stdout } from 'node:process';
+import { cwd, argv, exit } from 'node:process';
 import { runXianyuAdapter } from './adapters/xianyu.js';
 import { runBossAdapter } from './adapters/boss.js';
 import { readState, stateExists, initState as doInitState } from './state-manager.js';

@@ -34,6 +34,7 @@ export interface XianyuResult {
  * 在目标页面上执行的 JS 提取器。
  * 启发式：找含单个 ¥ 价格的文本节点，归并卡片，去重。
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 function pageExtractorCode(): any {
   const out: any = { url: location.href, title: document.title, items: [], diagnostics: {} };
   const bodyText = (document.body.innerText || '');
@@ -44,7 +45,6 @@ function pageExtractorCode(): any {
   if (/加载中/.test(bodyText) && bodyText.length < 600)
     out.diagnostics.maybeNeedLogin = '疑似未登录/结果未加载（页面停在"加载中"）';
 
-  const priceRe = /[¥￥]\s?\d[\d,.]*/;
   const priceReG = /[¥￥]\s?\d[\d,.]*/g;
   const wantRe = /(\d[\d,.]*)\s*人?想要/;
   const priceCount = (s: string) => (s.match(priceReG) || []).length;
