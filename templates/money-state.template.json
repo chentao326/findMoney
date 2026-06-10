@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "created_at": "<填写 init 当天日期 YYYY-MM-DD>",
+  "profile": {
+    "tier": "T0|T1|T2|T3",
+    "tier_reason": "<判成这档的一句理由,允许用户改>",
+    "skills": [],
+    "weekly_hours": null,
+    "startup_capital": 0,
+    "region": "中国大陆",
+    "can_show_face": null,
+    "language": ["中文"],
+    "notes": ""
+  },
+  "opportunities": [
+    {
+      "id": "示例-删掉",
+      "name": "",
+      "category": "",
+      "for_tier": "T0|T1|T2|T3",
+      "money_source": "",
+      "verdict": "高危|存疑|可行",
+      "red_flags": [],
+      "suspect_flags": [],
+      "freshness": "<关键来源年份/是否交叉验证/过时风险>",
+      "verify_first_step": "",
+      "income_expectation": "",
+      "status": "candidate|verifying|chosen|running|dropped|done",
+      "found_at": ""
+    }
+  ],
+  "active": {
+    "chosen_id": null,
+    "started_at": null,
+    "plan": null,
+    "prediction": {
+      "expected_hours": null,
+      "expected_first_income_days": null,
+      "expected_income_range": null,
+      "recorded_at": null
+    }
+  },
+  "retro_log": []
+}

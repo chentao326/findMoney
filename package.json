@@ -1,0 +1,26 @@
+{
+  "name": "cheat-on-money",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AI 时代靠谱兼职发现 + 反诈验证 skill 系统",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

@@ -1,0 +1,21 @@
+# 依赖
+node_modules/
+npm-debug.log*
+
+# 编译输出
+dist/
+
+# 运行时数据（用户用 skill 时产生，绝不进仓库）
+.money-state.json
+lessons.md
+.money-chrome-profile/
+
+# OS / 编辑器
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# 临时分析产物
+cheat-on-money-analysis.md
+cheat-on-money-analysis/
